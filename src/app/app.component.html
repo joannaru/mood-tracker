@@ -1,0 +1,54 @@
+<header>
+  <mat-toolbar color="primary" class="main-toolbar">
+    <span
+      ><a routerLink="/start" routerLinkActive="active">Mood tracker</a>
+    </span>
+    <span class="toolbar-link"
+      ><small
+        ><a routerLink="/form" routerLinkActive="active"
+          >Reactive form</a
+        ></small
+      ></span
+    >
+    <span class="toolbar-link"
+      ><small
+        ><a routerLink="/saved" routerLinkActive="active">Saved data</a></small
+      ></span
+    >
+    <span class="app-spacer"></span>
+    <span><i class="fas fa-2x fa-theater-masks"></i></span>
+  </mat-toolbar>
+</header>
+
+<main>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+
+<footer class="main-footer">
+  <div class="container">
+    <div><p class="mat-h3">Joanna Rudak</p></div>
+
+    <div>
+      <p class="mat-h4">UI component library</p>
+      <p class="mat-body">
+        <a href="https://material.angular.io/">Angular Material</a>
+      </p>
+    </div>
+    <div>
+      <p class="mat-h4">Web layout model</p>
+      <p class="mat-body">
+        <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/"
+          >Flexbox</a
+        >
+      </p>
+    </div>
+    <div>
+      <p class="mat-h4">Preprocessor scripting language</p>
+      <p class="mat-body">
+        <a href="https://sass-lang.com/">SCSS</a>
+      </p>
+    </div>
+  </div>
+</footer>

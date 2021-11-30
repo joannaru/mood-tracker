@@ -1,0 +1,89 @@
+@import '../colors';
+
+:host {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+}
+
+a {
+  color: white;
+}
+
+a.active {
+  color: $champagne
+}
+
+.main-toolbar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+
+
+}
+
+.main-footer {
+
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 1px solid lightgrey;
+    margin: 1rem;
+    padding-top: 1rem;
+    color: #666666;
+
+    a {
+      color: $fawn;
+    }
+  }
+
+}
+
+main {
+  flex: 1;
+
+  .container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0 1rem 0;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .main-toolbar {
+    display: flex;
+    flex-direction: row;
+    height: inherit;
+    padding-top: 0.5rem;
+
+    .toolbar-link {
+      padding: 0 0 0 1rem;
+
+    }
+  }
+
+  main {
+    .container {
+      margin: 2rem 8rem 2rem 8rem;
+    }
+  }
+
+  .main-footer {
+
+
+    .container {
+      flex-direction: row;
+      margin: 2rem 8rem 1rem 8rem;
+
+    }
+  }
+}

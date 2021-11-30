@@ -1,0 +1,22 @@
+.form-task {
+  .margin-right {
+    margin-right: 1rem;
+
+  }
+
+  .w50 {
+    width: 50%
+  }
+
+  .row.task-state {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .row.row-hours {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+}

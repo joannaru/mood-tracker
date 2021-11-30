@@ -1,0 +1,17 @@
+@import '../../../colors';
+
+:host {
+  width: 100%;
+  margin: 1rem 2rem 2rem 2rem;
+}
+
+a {
+  color: $hookers-green;
+}
+
+
+@media only screen and (min-width:600px) {
+  :host {
+    margin: 0;
+  }
+}

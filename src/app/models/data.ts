@@ -1,0 +1,1 @@
+export const RELAX_OPTIONS = ['Netflix', 'Yoga', 'Walk', 'Reading', 'Bubble bath'];

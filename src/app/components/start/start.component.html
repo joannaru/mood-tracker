@@ -1,0 +1,54 @@
+<h1>This is a mood tracking application.</h1>
+<p>The aim of this app is to collect everyday mood data.</p>
+
+<h2>
+  This app contains Angular Reactive form with the following functionalities
+  implemented:
+</h2>
+<ul>
+  <li>
+    {{
+      "dynamic enabling & disabling fields - using valueChanges Observable"
+        | startWithCapital
+    }}
+  </li>
+  <li>Custom Directive</li>
+  <li>Custom pipe</li>
+  <li>Custom Validator</li>
+  <li>Reusable nested Reactive form</li>
+  <ul>
+    <li>
+      including implementation of Control Value Accessor and Validator
+      interfaces, in order to to communicate with parent form
+    </li>
+  </ul>
+  <li>Error handling</li>
+  <li>Saving form data to localStorage and presenting saved data</li>
+</ul>
+<h2>This application also uses:</h2>
+<ul>
+  <li>Angular RouterModule</li>
+  <li>Angular Material UI component library (Inputs, Stepper)</li>
+  <ul>
+    <li>with customized colors (Angular Material's theming)</li>
+  </ul>
+  <li>SCSS (variables, maps, loops)</li>
+  <li>CSS Flex Box Layout</li>
+</ul>
+<h2>Site is <b>WCAG AA compliant</b></h2>
+<p>Checked with following tools:</p>
+<ul>
+  <li>
+    <a href="https://webaim.org/resources/contrastchecker/">WebAIM</a>
+    Contrast checker
+  </li>
+
+  <li>
+    <a
+      href="https://chrome.google.com/webstore/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh?hl=pl"
+      >Wave Evaluation Tool</a
+    >
+  </li>
+</ul>
+
+<button mat-raised-button color="accent" routerLink="/form">START</button>

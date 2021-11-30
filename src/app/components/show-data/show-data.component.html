@@ -1,0 +1,22 @@
+<ng-container *ngIf="saved; else unsavedTmpl">
+  <h1>Mood saved</h1>
+
+  <app-step1
+    class="form-step"
+    [data]="formJSON.form1"
+    [readonly]="true"
+  ></app-step1>
+  <app-step2
+    class="form-step"
+    [data]="formJSON.form2"
+    [readonly]="true"
+  ></app-step2>
+  <app-step3
+    class="form-step"
+    [data]="formJSON.form3"
+    [readonly]="true"
+  ></app-step3>
+</ng-container>
+<ng-template #unsavedTmpl>
+  <h1>No saved data yet.</h1>
+</ng-template>

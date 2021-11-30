@@ -1,0 +1,20 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+  width: 100%;
+}
+
+::ng-deep .mat-input-element:disabled,
+::ng-deep .mat-radio-button.mat-radio-disabled .mat-radio-label-content,
+::ng-deep .mat-checkbox-disabled .mat-checkbox-label {
+  color: #000000;
+}
+
+
+@media only screen and (min-width: 600px) {
+  :host {
+    margin: 2rem;
+  }
+}

@@ -1,0 +1,131 @@
+<form [formGroup]="form" class="form">
+  <!-- form.socialNetwork -->
+  <div class="row">
+    <h2>Social Networks</h2>
+    <div class="row social-network-group">
+      <div
+        class="social-network-control"
+        *ngFor="
+          let singleSocialNetworksFormGroup of socialNetworks.controls;
+          let idx = index
+        "
+      >
+        <div [formGroup]="singleSocialNetworksFormGroup">
+          <mat-checkbox
+            [formControlName]="socialNetworksOptions[idx].name"
+            disableRipple="true"
+            [value]="socialNetworkVal(idx)"
+          >
+            <div
+              class="circle"
+              [ngClass]="
+                'bg-' +
+                (true === socialNetworkVal(idx)
+                  ? socialNetworksOptions[idx].color
+                  : 'white')
+              "
+            >
+              <i
+                [ngClass]="[
+                  'font-' +
+                    (true === socialNetworkVal(idx)
+                      ? 'white'
+                      : socialNetworksOptions[idx].color)
+                ]"
+                [class]="'icon-circle fa-2x ' + socialNetworksOptions[idx].icon"
+              ></i>
+            </div>
+
+            <p class="text">
+              {{ socialNetworksOptions[idx].name }}
+            </p></mat-checkbox
+          >
+        </div>
+      </div>
+    </div>
+
+    <mat-error
+      *ngIf="
+        (socialNetworks.touched || socialNetworks.dirty) &&
+        socialNetworks.errors?.required
+      "
+    >
+      Invalid social network activity
+    </mat-error>
+  </div>
+
+  <!-- form.friends (OPTIONAL)-->
+  <div class="row">
+    <mat-form-field *ngIf="friends.disabled === false" class="full-width">
+      <mat-label>Friends list</mat-label>
+      <textarea
+        #friends
+        formControlName="friends"
+        matInput
+        placeholder="Ex. Jane Doe"
+      ></textarea>
+    </mat-form-field>
+    <mat-error *ngIf="friends.touched || friends.dirty">
+      <p *ngIf="friends.errors?.required">Friends list is required</p>
+      <p *ngIf="friends.errors?.minlength">
+        Friends list is too short (minimum
+        {{ friends.errors.minlength.requiredLength }} signs)
+      </p>
+    </mat-error>
+  </div>
+  <!-- form.food -->
+  <div class="row food-container">
+    <h2>What did you eat today?</h2>
+    <ng-container formArrayName="food">
+      <ng-container *ngFor="let foodForm of food.controls">
+        <div class="row food-row" [formGroup]="foodForm">
+          <div class="meal">
+            <mat-form-field>
+              <input matInput formControlName="name" placeholder="meal" />
+            </mat-form-field>
+            <mat-error
+              *ngIf="
+                (foodForm.controls.name.touched ||
+                  foodForm.controls.name.dirty) &&
+                foodForm.controls.name.errors?.required
+              "
+            >
+              Meal name is required
+            </mat-error>
+          </div>
+          <div class="amount">
+            <mat-form-field>
+              <input
+                matInput
+                formControlName="amount"
+                type="number"
+                placeholder="amount"
+              />
+            </mat-form-field>
+
+            <mat-error
+              *ngIf="
+                (foodForm.controls.amount.touched ||
+                  foodForm.controls.amount.dirty) &&
+                foodForm.controls.amount.errors?.required
+              "
+            >
+              Amount is required
+            </mat-error>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+    <ng-container>
+      <mat-error *ngIf="food.errors?.required">
+        Food field is required
+      </mat-error>
+    </ng-container>
+    <button mat-mini-fab (click)="addFood()">+</button>
+  </div>
+  <!-- form.work -->
+  <div class="row">
+    <h2>Work</h2>
+    <app-task formControlName="work" #work></app-task>
+  </div>
+</form>

@@ -1,0 +1,232 @@
+/* You can add global styles to this file, and also import other style files */
+@import './colors';
+// angular material theming
+@import '~@angular/material/theming';
+@include mat-core();
+
+// define own theme colors: primary, accent, warn
+$my-primary: (50: $hookers-green,
+  100: $hookers-green,
+  200: $hookers-green,
+  300: $hookers-green,
+  400: $hookers-green,
+  500: $hookers-green,
+  600: $hookers-green,
+  700: $hookers-green,
+  800: $hookers-green,
+  900: $hookers-green,
+  A100: $hookers-green,
+  A200: $hookers-green,
+  A400: $hookers-green,
+  A700: $hookers-green,
+  contrast: (50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  ));
+
+$my-accent: (50: $fawn,
+  100: $fawn,
+  200: $fawn,
+  300: $fawn,
+  400: $fawn,
+  500: $fawn,
+  600: $fawn,
+  700: $fawn,
+  800: $fawn,
+  900: $fawn,
+  A100: $fawn,
+  A200: $fawn,
+  A400: $fawn,
+  A700: $fawn,
+  contrast: (50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  ));
+
+$my-warn: (50: $light-coral,
+  100: $light-coral,
+  200: $light-coral,
+  300: $light-coral,
+  400: $light-coral,
+  500: $light-coral,
+  600: $light-coral,
+  700: $light-coral,
+  800: $light-coral,
+  900: $light-coral,
+  A100: $light-coral,
+  A200: $light-coral,
+  A400: $light-coral,
+  A700: $light-coral,
+  contrast: (50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  ));
+
+$my-app-primary: mat-palette($my-primary);
+$my-app-accent: mat-palette($my-accent, 500, 900, A100);
+$my-app-warn: mat-palette($my-warn);
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+@include angular-material-theme($my-app-theme);
+
+// /angular material theming
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.full-width {
+  width: 100%;
+}
+
+// emoji colors (radio, checkbox)
+$colors: ('darkgreen':$hookers-green,
+  'green':$dark-sea-green,
+  'gold':$gold-crayola,
+  'orange':$fawn,
+  'red':$light-coral,
+  'white':'#fff',
+  'app-primary': $hookers-green,
+  'app-accent': $fawn,
+  'app-warn': $light-coral,
+  'champagne':$champagne);
+
+@each $colorname,
+$color in $colors {
+  .emoji-#{$colorname} {
+    background-color: #{$color};
+    color: #fff;
+  }
+
+  .emoji-#{$colorname}-rev {
+    background-color: #fff;
+    color: #{$color};
+  }
+
+
+  .bg-#{$colorname} {
+    background-color: #{$color};
+  }
+
+  .font-#{$colorname} {
+    color: #{$color};
+  }
+}
+
+// /step 1 emoji colors
+
+a {
+  text-decoration: none;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+
+  legend {
+    color: rgba(0, 0, 0, 0.38);
+  }
+}
+
+// global settings for all Step child-components with Forms
+.form {
+  min-width: 150px;
+  height: 100%;
+  margin: 1rem 0 1rem 0;
+
+}
+
+#stepper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .mat-horizontal-content-container {
+    height: 100%;
+
+
+    div[role=tabpanel]:not([style*='visibility: hidden']) {
+      height: 100%;
+    }
+
+    div[role=tabpanel] {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+  }
+
+  div[class*=mat-horizontal-stepper-header-container] {
+    display: flex;
+    flex-direction: column;
+    max-height: 49px;
+    overflow-y: scroll;
+
+    .mat-step-header {
+      min-height: 50px;
+    }
+  }
+}
+
+.form-step {
+  width: 100%;
+}
+
+
+@media only screen and (min-width: 600px) {
+  #stepper {
+    div[class*=mat-horizontal-stepper-header-container] {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+}
+
+// /global settings for all Steps with Forms
+.app-spacer {
+  flex: 1 1 auto;
+}

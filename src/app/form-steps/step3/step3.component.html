@@ -1,0 +1,16 @@
+<form [formGroup]="form" class="form">
+  <h2>Relax</h2>
+  <ng-container *ngFor="let singleRelaxFg of relax.controls; let i = index">
+    <div class="chceckboxForm" [formGroup]="singleRelaxFg">
+      <mat-checkbox
+        [formControlName]="checkboxesData[i]"
+        [value]="checkboxesData[i]"
+        >{{ checkboxesData[i] }}</mat-checkbox
+      >
+    </div>
+  </ng-container>
+
+  <mat-error *ngIf="form.errors?.optionRequired">
+    No relax today? :( Please do something nice for yourself and comeback later!
+  </mat-error>
+</form>

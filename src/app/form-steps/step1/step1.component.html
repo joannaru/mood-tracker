@@ -1,0 +1,44 @@
+<form [formGroup]="form" class="form">
+  <div class="row">
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input formControlName="date" matInput [matDatepicker]="picker" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-error *ngIf="date.errors?.required"> Enter a valid date.</mat-error>
+  </div>
+
+  <div class="row">
+    <h2 class="question">How are you today?</h2>
+
+    <fieldset>
+      <mat-radio-group
+        class="icon-radio-group"
+        formControlName="moodName"
+        aria-label="How are you today?"
+      >
+        <ng-container *ngFor="let mood of moods">
+          <mat-radio-button
+            [ngClass]="['emoji-' + mood.color + '-rev']"
+            disableRipple="true"
+            [value]="mood.name"
+          >
+            <i
+              [ngClass]="[
+                'emoji-' +
+                  mood.color +
+                  (mood.name === moodName.value ? '' : '-rev')
+              ]"
+              [class]="'icon-circle far fa-5x fa-' + mood.icon"
+            ></i>
+            <p class="text">{{ mood.name }}</p></mat-radio-button
+          >
+        </ng-container>
+      </mat-radio-group>
+      <legend>Click on emoji that describe your mood</legend>
+    </fieldset>
+    <mat-error *ngIf="moodName.errors?.required"> Mood is required. </mat-error>
+    <mat-error *ngIf="moodName.errors?.pattern"> Invalid mood. </mat-error>
+  </div>
+</form>

@@ -1,0 +1,86 @@
+<form class="form-task" [formGroup]="form">
+  <!-- form.projectName -->
+  <div class="row">
+    <mat-label>Project name</mat-label>
+    <mat-form-field class="full-width">
+      <input
+        #projectNameField
+        matInput
+        aria-label="Enter project name"
+        placeholder="Enter project name"
+        formControlName="projectName"
+      />
+    </mat-form-field>
+    <mat-hint>{{ projectNameField.value.length }}/20</mat-hint>
+    <mat-error *ngIf="projectName.touched || projectName.dirty">
+      <p *ngIf="projectName.errors?.required">Project name is required</p>
+      <p *ngIf="projectName.errors?.minlength">
+        Project name is too short (minimum
+        {{ projectName.errors.minlength.requiredLength }} signs)
+      </p>
+      <p *ngIf="projectName.errors?.maxlength">
+        Project name is too long (maximum
+        {{ projectName.errors.maxlength.requiredLength }} signs)
+      </p>
+    </mat-error>
+  </div>
+  <!-- form.taskName -->
+  <div class="row">
+    <mat-label>Task name</mat-label>
+    <mat-form-field class="full-width">
+      <input
+        #taskNameField
+        matInput
+        aria-label="Enter task name"
+        placeholder="Enter task name"
+        formControlName="taskName"
+      />
+    </mat-form-field>
+    <mat-hint>{{ taskNameField.value.length }}/30</mat-hint>
+    <mat-error *ngIf="taskName.touched || taskName.dirty">
+      <p *ngIf="taskName.errors?.required">Task name is required</p>
+      <p *ngIf="taskName.errors?.minlength">
+        Task name is too short (minimum
+        {{ taskName.errors.minlength.requiredLength }} signs)
+      </p>
+      <p *ngIf="taskName.errors?.maxlength">
+        Task name is too long (maximum
+        {{ taskName.errors.maxlength.requiredLength }} signs)
+      </p>
+    </mat-error>
+  </div>
+  <!-- form.hours -->
+  <div class="row row-hours">
+    <mat-label>Hours</mat-label>
+    <mat-form-field class="w50 margin-right">
+      <input
+        matInput
+        aria-label="Enter hours number"
+        placeholder="Enter hours number"
+        type="number"
+        formControlName="hours"
+      />
+    </mat-form-field>
+    <mat-error *ngIf="hours.touched || hours.dirty">
+      <p *ngIf="hours.errors?.required">Task hours is required</p>
+      <p *ngIf="hours.errors?.pattern">Invalid number</p>
+    </mat-error>
+  </div>
+  <!-- form.state -->
+  <div class="row task-state">
+    <mat-label>Task state</mat-label>
+    <fieldset>
+      <mat-radio-group aria-label="Select an option" formControlName="state">
+        <mat-radio-button class="margin-right" value="in progress"
+          >In progress</mat-radio-button
+        >
+        <mat-radio-button value="done">Done</mat-radio-button>
+      </mat-radio-group>
+      <legend>Choose current state</legend>
+    </fieldset>
+    <mat-error *ngIf="state.touched || state.dirty">
+      <p *ngIf="state.errors?.required">Project state is required</p>
+      <p *ngIf="state.errors?.pattern">Invalid Project state</p>
+    </mat-error>
+  </div>
+</form>

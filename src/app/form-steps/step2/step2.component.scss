@@ -1,0 +1,86 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  justify-content: center;
+
+  // hide default checkbox icon
+  ::ng-deep .mat-checkbox-inner-container {
+    width: 0;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  ::ng-deep .mat-checkbox-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+
+
+  .circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .food-container {
+    margin-bottom: 1rem;
+
+    button.mat-mini-fab {
+      margin-top: 1rem;
+
+    }
+  }
+
+  .food-row {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .social-network-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    mat-checkbox {
+      padding: 0.4rem;
+    }
+
+    .social-network-control {
+      display: inline-block;
+
+      .icon-circle {
+        display: flex;
+        align-items: center;
+      }
+
+      p.text {
+        text-align: center;
+      }
+    }
+  }
+}
+
+
+@media only screen and (min-width: 600px) {
+
+  .form {
+    .food-row {
+      display: flex;
+      flex-direction: row;
+
+      .meal {
+        margin-right: 3rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,81 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.form {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .question {
+    text-align: center;
+  }
+
+  .icon-radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    // hide default radio icon
+    ::ng-deep .mat-radio-container .mat-focus-indicator {
+      width: 0;
+    }
+
+    ::ng-deep .mat-radio-container .mat-radio-outer-circle,
+    ::ng-deep .mat-radio-container .mat-radio-inner-circle {
+      border: none;
+      width: 0;
+    }
+
+    ::ng-deep .mat-radio-container .mat-focus-indicator {
+      width: 0;
+    }
+
+    ::ng-deep .mat-radio-container {
+      width: 0;
+    }
+
+    // /hide default radio icon
+    .mat-radio-button {
+      padding: 0.4rem;
+    }
+
+    .icon-circle {
+      position: relative;
+      border-radius: 50%;
+
+      // hide shadow border 
+      &::after {
+        position: absolute;
+        top: 0;
+        left: -1px;
+        content: '\f111';
+        color: #fff;
+        transform: scale(1.2)
+      }
+    }
+
+    p.text {
+      text-align: center;
+    }
+  }
+
+}
+
+@media only screen and (min-width: 600px) {
+
+  .form {
+    .icon-radio-group {
+      flex-wrap: nowrap;
+
+      .mat-radio-button {
+        padding: 1.5rem;
+      }
+    }
+  }
+}

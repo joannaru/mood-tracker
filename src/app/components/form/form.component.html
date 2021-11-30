@@ -1,0 +1,50 @@
+<h1 appCenter>Mood Form</h1>
+<!-- [linear]="isLinear" -->
+<mat-stepper #stepper id="stepper" [linear]="isLinear">
+  <mat-step [stepControl]="step1.form">
+    <ng-template matStepLabel>General</ng-template>
+    <app-step1 #step1 class="form-step"></app-step1>
+    <div class="form-buttons">
+      <button
+        [disabled]="!step1.form.valid"
+        mat-raised-button
+        matStepperNext
+        color="primary"
+      >
+        Next
+      </button>
+    </div>
+  </mat-step>
+
+  <mat-step [stepControl]="step2.form">
+    <ng-template matStepLabel>Details</ng-template>
+    <app-step2 #step2 class="form-step"></app-step2>
+    <div class="form-buttons">
+      <button mat-raised-button matStepperPrevious>Previous</button>
+      <button
+        [disabled]="!step2.form.valid"
+        mat-raised-button
+        matStepperNext
+        color="primary"
+      >
+        Next
+      </button>
+    </div>
+  </mat-step>
+
+  <mat-step [stepControl]="step3.form">
+    <ng-template matStepLabel>More details</ng-template>
+    <app-step3 #step3 class="form-step"></app-step3>
+    <div class="form-buttons">
+      <button mat-raised-button matStepperPrevious>Previous</button>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="submit(step1.form, step2.form, step3.form)"
+      >
+        Save
+      </button>
+    </div>
+    <mat-error *ngIf="errorOnSave.length > 0"> {{ errorOnSave }} </mat-error>
+  </mat-step>
+</mat-stepper>
