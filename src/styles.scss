@@ -101,10 +101,17 @@ $my-app-warn: mat-palette($my-warn);
 $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
 @include angular-material-theme($my-app-theme);
 
+$custom-typography: mat-typography-config($font-family: 'Montserrat, sans-serif',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500));
+@include mat-base-typography($custom-typography);
+
 // /angular material theming
 * {
   box-sizing: border-box;
+  font-family: Montserrat, "Helvetica Neue", sans-serif;
 }
+
 
 html,
 body {
@@ -113,7 +120,6 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .full-width {
@@ -129,8 +135,7 @@ $colors: ('darkgreen':$hookers-green,
   'white':'#fff',
   'app-primary': $hookers-green,
   'app-accent': $fawn,
-  'app-warn': $light-coral,
-  'champagne':$champagne);
+  'app-warn': $light-coral);
 
 @each $colorname,
 $color in $colors {

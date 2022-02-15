@@ -1,17 +1,34 @@
 @import '../../../colors';
 
 :host {
-  width: 100%;
-  margin: 1rem 2rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 3rem 0 1rem;
+  align-items: center;
 }
 
-a {
-  color: $hookers-green;
-}
+.cards {
+  .card {
+    width: 100%;
 
+    .title {
+      text-align: center;
+    }
+
+    .body {
+      text-align: justify;
+    }
+  }
+}
 
 @media only screen and (min-width:600px) {
-  :host {
-    margin: 0;
+  .cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .card {
+      width: 45%;
+    }
   }
 }

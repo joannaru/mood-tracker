@@ -4,6 +4,7 @@
   width: 100vw;
   min-height: 100vh;
   display: flex;
+  flex: 1;
   flex-direction: column;
 
 }
@@ -13,23 +14,25 @@ a {
 }
 
 a.active {
-  color: $champagne
+  color: $light;
 }
 
 .main-toolbar {
-  display: flex;
-  flex-direction: column;
+  width: 100vw;
   height: 100%;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  font-size: 1.5rem;
 
+  .container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin: 1rem;
+  }
 
 
 }
 
 .main-footer {
-
-
   .container {
     display: flex;
     flex-direction: column;
@@ -60,10 +63,13 @@ main {
 
 @media only screen and (min-width: 600px) {
   .main-toolbar {
-    display: flex;
-    flex-direction: row;
-    height: inherit;
-    padding-top: 0.5rem;
+    height: 4rem;
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      margin: 0 8rem 0 8rem;
+    }
 
     .toolbar-link {
       padding: 0 0 0 1rem;
@@ -78,8 +84,6 @@ main {
   }
 
   .main-footer {
-
-
     .container {
       flex-direction: row;
       margin: 2rem 8rem 1rem 8rem;
