@@ -15,7 +15,7 @@
     <fieldset>
       <mat-radio-group
         class="icon-radio-group"
-        formControlName="moodName"
+        [formControlName]="EStep1.MOOD_NAME"
         aria-label="How are you today?"
       >
         <ng-container *ngFor="let mood of moods">

@@ -1,5 +1,5 @@
 <form class="form-task" [formGroup]="form">
-  <!-- form.projectName -->
+  <!-- projectName -->
   <div class="row">
     <mat-label>Project name</mat-label>
     <mat-form-field class="full-width">
@@ -24,7 +24,7 @@
       </p>
     </mat-error>
   </div>
-  <!-- form.taskName -->
+  <!-- taskName -->
   <div class="row">
     <mat-label>Task name</mat-label>
     <mat-form-field class="full-width">
@@ -49,7 +49,7 @@
       </p>
     </mat-error>
   </div>
-  <!-- form.hours -->
+  <!-- hours -->
   <div class="row row-hours">
     <mat-label>Hours</mat-label>
     <mat-form-field class="w50 margin-right">
@@ -66,7 +66,7 @@
       <p *ngIf="hours.errors?.pattern">Invalid number</p>
     </mat-error>
   </div>
-  <!-- form.state -->
+  <!-- state -->
   <div class="row task-state">
     <mat-label>Task state</mat-label>
     <fieldset>

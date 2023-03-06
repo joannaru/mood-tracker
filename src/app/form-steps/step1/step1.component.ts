@@ -1,3 +1,4 @@
+import { EStep1 } from './../../enums/step1.enum';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
@@ -10,6 +11,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 
 })
 export class Step1Component implements OnInit {
+  EStep1 = EStep1;
   @Input() data!:Object;
   @Input() readonly!:boolean;
 
@@ -22,8 +24,8 @@ export class Step1Component implements OnInit {
   ]
 
   form = this.fb.group({
-    date: [new Date(),{validators:[Validators.required]}], 
-    moodName: [null,{validators:[Validators.required, Validators.pattern('('+this.moods.map(x=>x.name).join('|')+')')]}]
+    [EStep1.DATE]: [new Date(),{validators:[Validators.required]}], 
+    [EStep1.MOOD_NAME]: [null,{validators:[Validators.required, Validators.pattern('('+this.moods.map(x=>x.name).join('|')+')')]}]
   })
 
   constructor(private fb: FormBuilder) { }
@@ -44,7 +46,7 @@ export class Step1Component implements OnInit {
   }
 
   get moodName(){
-    return this.form.controls.moodName;
+    return this.form.controls[EStep1.MOOD_NAME];
   }
 
 }

@@ -1,16 +1,16 @@
 <form [formGroup]="form" class="form">
-  <!-- form.socialNetwork -->
+  <!-- social networks -->
   <div class="row">
     <h2>Social Networks</h2>
     <div class="row social-network-group">
       <div
         class="social-network-control"
         *ngFor="
-          let singleSocialNetworksFormGroup of socialNetworks.controls;
+          let singleSocialNetworkControl of socialNetworks.controls;
           let idx = index
         "
       >
-        <div [formGroup]="singleSocialNetworksFormGroup">
+        <div [formGroup]="singleSocialNetworkControl">
           <mat-checkbox
             [formControlName]="socialNetworksOptions[idx].name"
             disableRipple="true"
@@ -43,18 +43,16 @@
         </div>
       </div>
     </div>
-
     <mat-error
       *ngIf="
-        (socialNetworks.touched || socialNetworks.dirty) &&
-        socialNetworks.errors?.required
+        form.controls.socialNetworks.touched && form.errors?.optionRequired
       "
     >
-      Invalid social network activity
+      Select at least one option
     </mat-error>
   </div>
 
-  <!-- form.friends (OPTIONAL)-->
+  <!-- social networks: friends => friends list -->
   <div class="row">
     <mat-form-field *ngIf="friends.disabled === false" class="full-width">
       <mat-label>Friends list</mat-label>
@@ -73,7 +71,8 @@
       </p>
     </mat-error>
   </div>
-  <!-- form.food -->
+
+  <!-- food -->
   <div class="row food-container">
     <h2>What did you eat today?</h2>
     <ng-container formArrayName="food">
@@ -123,7 +122,8 @@
     </ng-container>
     <button mat-mini-fab (click)="addFood()">+</button>
   </div>
-  <!-- form.work -->
+
+  <!-- work -->
   <div class="row">
     <h2>Work</h2>
     <app-task formControlName="work" #work></app-task>

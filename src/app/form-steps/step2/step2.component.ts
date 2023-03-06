@@ -1,134 +1,143 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { GroupedObservable } from 'rxjs';
-import { createCheckboxesValidator } from 'src/app/validators/checkboxes-validator.validator';
+import { EStep2 } from './../../enums/step2.enum';
+import { minOneOptionValidator } from 'src/app/validators/min-one-option-validator.validator';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { SOCIAL_NETWORKS_OPTIONS } from 'src/app/models/data';
 
 @Component({
   selector: 'app-step2',
   templateUrl: './step2.component.html',
-  styleUrls: ['./step2.component.scss']
+  styleUrls: ['./step2.component.scss'],
 })
-export class Step2Component implements OnInit {
+export class Step2Component implements OnInit, OnDestroy {
+  sub: Subscription = new Subscription();
+  @Input() data!: { [key: string]: any };
+  @Input() readonly!: boolean;
+  socialNetworksOptions = SOCIAL_NETWORKS_OPTIONS;
+  EStep2 = EStep2;
 
-  @Input() data!:keyable;
-  @Input() readonly!:boolean;
+  friendsIndex = this.socialNetworksOptions
+    .map((x) => x.name)
+    .findIndex((x) => x === 'Friends');
 
-  socialNetworksOptions = [
-    {name:'Online chat', icon: 'far fa-comments', color:'app-accent'},
-    {name:'Phone chat', icon: 'fas fa-phone', color:'app-accent'},
-    {name:'Friends', icon: 'fas fa-user-friends', color:'app-accent'},
-    {name:'Date', icon: 'far fa-heart', color:'app-accent'},
-    {name:'Home', icon: 'fas fa-home', color:'app-accent'},
-  ];
+  form = this.fb.group(
+    {
+      [EStep2.SOCIAL_NETWORKS]: this.fb.array([]),
+      [EStep2.FRIENDS]: [
+        { value: '', disabled: true },
+        { validators: [Validators.required, Validators.minLength(3)] },
+      ],
+      [EStep2.FOOD]: this.fb.array([], Validators.required),
+      [EStep2.WORK]: ['', Validators.required],
+    },
+    {
+      validators: [minOneOptionValidator('socialNetworks')],
+    }
+  );
 
-  friendsIndex = this.socialNetworksOptions.map(x=>x.name).findIndex(x=>x==='Friends')
-
-  form=this.fb.group({
-    socialNetworks: this.fb.array([]),
-    friends: [{value:'', disabled: true}, {validators:[Validators.required, Validators.minLength(3)]}],
-    food: this.fb.array([], Validators.required),
-    work: ['', Validators.required],
-  },
-  {validators:[
-    createCheckboxesValidator(this.socialNetworksOptions.map(x=>x.name))], 
+  get socialNetworks() {
+    return this.form.controls[EStep2.SOCIAL_NETWORKS] as FormArray;
   }
-  )
 
+  get friends() {
+    return this.form.controls[EStep2.FRIENDS];
+  }
+
+  get food() {
+    return this.form.controls[EStep2.FOOD] as FormArray;
+  }
+
+  get work() {
+    return this.form.controls[EStep2.WORK];
+  }
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    //init form.socialNetworks
-    this.initSocialNetworksArray()
+    //init EStep2.SOCIAL_NETWORKS
+    this.initSocialNetworksArray();
+    this.onFormChanges();
+    this.readSavedData();
+    this.disableForm();
+  }
 
-    this.form.valueChanges.subscribe(currentForm=>{
-      let friendsChecked=null;
-      try{
-        friendsChecked = currentForm.socialNetworks[this.friendsIndex]['Friends'];
-      }catch(error){
+  onFormChanges() {
+    const subValueChanges = this.form.valueChanges.subscribe((currentForm) => {
+      this.form.markAllAsTouched();
+
+      let friendsChecked = null;
+      try {
+        friendsChecked =
+          currentForm.socialNetworks[this.friendsIndex]['Friends'];
+      } catch (error) {
         // no dynamic field needed
       }
 
       // dynamic field textarea form.friends
-      if( friendsChecked){
-
-        if(friendsChecked === true && this.friends.disabled){
-          this.friends.enable({emitEvent:false}); // enable and prevent call valueChanges (event infinite loop)
+      if (friendsChecked) {
+        if (friendsChecked === true && this.friends.disabled) {
+          this.friends.enable({ emitEvent: false }); // enable and prevent call valueChanges (event infinite loop)
         }
-      }else{
-        if(friendsChecked===false && this.friends.enabled){
-          this.friends.disable({emitEvent:false})
-        }
-      }
-    })
-
-    // read saved data
-
-    if(this.data){
-      // dynamic inputs
-      if(this.data.food && this.data.food instanceof Array){
-        for(let i=0;i<this.data.food.length; i++){
-          this.addFood()
+      } else {
+        if (friendsChecked === false && this.friends.enabled) {
+          this.friends.disable({ emitEvent: false });
         }
       }
-      this.form.setValue(this.data);
-    }
-    if(this.readonly===true){
+    });
+    
+    this.sub.add(subValueChanges);
+  }
+
+  disableForm() {
+    if (this.readonly === true) {
       this.form.disable();
     }
   }
 
-  initSocialNetworksArray(){
-    for(let option of this.socialNetworksOptions){
+  readSavedData() {
+    // read saved data
+    if (this.data) {
+      // dynamic inputs
+      if (this.data.food && this.data.food instanceof Array) {
+        for (let i = 0; i < this.data.food.length; i++) {
+          this.addFood();
+        }
+      }
+      this.form.setValue(this.data);
+    }
+  }
+
+  initSocialNetworksArray() {
+    for (let option of this.socialNetworksOptions) {
       this.socialNetworks.push(
         this.fb.group({
-          [option.name]:false
-        }
-        )
-      )
+          [option.name]: false,
+        })
+      );
     }
-    console.log(this.socialNetworks.controls);
   }
 
-  get socialNetworks(){
-    return this.form.controls.socialNetworks as FormArray;
-  }
-
-  socialNetworkVal(idx:number){
-      let fg = this.socialNetworks.controls[idx] as FormGroup;
-      let fcs =  fg.controls;
+  socialNetworkVal(idx: number) {
+    let fg = this.socialNetworks.controls[idx] as FormGroup;
+    let fcs = fg.controls;
     return Object.values(fcs)[0].value;
-
-    
   }
 
-  get friends(){
-    return this.form.controls.friends;
-  }
-
-  get food(){
-    return this.form.controls.food as FormArray;
-  }
-
-  get work(){
-    return this.form.controls.work;
-  }
-
-  addFood(){
-   const foodForm =  this.fb.group({
-      name:['',Validators.required], 
-      amount:['', Validators.required]
-    })
+  addFood() {
+    const foodForm = this.fb.group({
+      name: ['', Validators.required],
+      amount: ['', Validators.required],
+    });
 
     this.food.push(foodForm);
   }
 
-  removeFood(index:number){
+  removeFood(index: number) {
     this.food.removeAt(index);
   }
 
-}
-
-export interface keyable {
-  [key: string]: any  
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }
